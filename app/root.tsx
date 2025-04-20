@@ -6,9 +6,12 @@ import {
   Scripts,
   ScrollRestoration,
 } from "react-router";
+import { Layout as AppLayout } from "./Layouts/Layout";
 
 import type { Route } from "./+types/root";
 import "./app.css";
+import { useEffect } from "react";
+import { initializeTheme } from "./utils/themeUtils";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -23,7 +26,28 @@ export const links: Route.LinksFunction = () => [
   },
 ];
 
+// Theme script to prevent flash during page load
+const themeScript = `
+  (function() {
+    function getThemePreference() {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'dark' || savedTheme === 'light') {
+        return savedTheme;
+      }
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+
+    const theme = getThemePreference();
+    document.documentElement.classList.toggle('dark', theme === 'dark');
+  })()
+`;
+
 export function Layout({ children }: { children: React.ReactNode }) {
+  // Initialize theme on page load
+  useEffect(() => {
+    initializeTheme();
+  }, []);
+
   return (
     <html lang="en">
       <head>
@@ -31,6 +55,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
+        {/* Inline script to prevent theme flash */}
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body>
         {children}
@@ -42,7 +68,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  return <Outlet />;
+  return (
+    <AppLayout>
+      <Outlet />
+    </AppLayout>
+  );
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {

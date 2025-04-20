@@ -25,7 +25,7 @@ A modern weather dashboard application built with React that allows users to che
 
 1. Clone the repository
 ```bash
-git clone https://github.com/yourusername/WeatherBericht.git
+git clone https://github.com/Haroldrivail/WeatherBericht.git
 cd WeatherBericht
 ```
 
