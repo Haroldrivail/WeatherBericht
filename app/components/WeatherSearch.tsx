@@ -238,7 +238,7 @@ export function WeatherSearch({
           <button
             type="button"
             onClick={onUnitToggle}
-            className="flex-none bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white w-12 sm:w-16 py-3 rounded-lg shadow transition duration-150 text-lg font-medium focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2"
+            className="flex-none bg-blue-500 hover:blue-700 text-white w-12 sm:w-16 py-3 rounded-lg shadow transition duration-150 text-lg font-medium focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2"
             aria-label={unit === "metric" ? "Switch to Fahrenheit" : "Switch to Celsius"}
           >
             {unit === "metric" ? "°C" : "°F"}

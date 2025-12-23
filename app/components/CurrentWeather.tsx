@@ -12,8 +12,8 @@ interface CurrentWeatherProps {
 export function CurrentWeather({ weatherData, unit }: CurrentWeatherProps) {
   return (
     <div className="mb-6 bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
-      {/* Location header with gradient background */}
-      <div className="bg-gradient-to-r from-blue-500 to-purple-500 text-white p-4">
+      {/* Location header with blue background */}
+      <div className="bg-blue-500 text-white p-4">
         <h2 className="text-2xl md:text-3xl font-bold flex flex-wrap items-center">
           {weatherData.location.name}
           {weatherData.location.country && (
