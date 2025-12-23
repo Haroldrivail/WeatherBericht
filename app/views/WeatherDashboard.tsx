@@ -108,20 +108,18 @@ export function WeatherDashboard() {
         // Fallback to IP-based geolocation
         console.log("Browser geolocation failed, trying IP-based fallback...");
         try {
-          const ipResponse = await fetch(
-            "http://ip-api.com/json/?fields=status,city,lat,lon"
-          );
+          const ipResponse = await fetch("https://ipapi.co/json/");
           const ipData = await ipResponse.json();
 
-          if (ipData.status === "success" && ipData.lat && ipData.lon) {
+          if (ipData.latitude && ipData.longitude) {
             const weatherData = await weatherApi.getCurrentWeatherByCoords(
-              ipData.lat,
-              ipData.lon,
+              ipData.latitude,
+              ipData.longitude,
               unit
             );
             const forecastData = await weatherApi.getForecastByCoords(
-              ipData.lat,
-              ipData.lon,
+              ipData.latitude,
+              ipData.longitude,
               unit
             );
 
